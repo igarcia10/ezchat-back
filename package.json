@@ -1,0 +1,23 @@
+{
+  "name": "ezchat-node",
+  "version": "1.0.0",
+  "description": "EZChat server",
+  "main": "index.js",
+  "author": "igarcia10",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "tsc -p .",
+    "start": "node dist/index.js",
+    "dev": "nodemon index.ts --exec ts-node index.ts -e ts"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
+  }
+}
