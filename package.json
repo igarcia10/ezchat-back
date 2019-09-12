@@ -6,10 +6,8 @@
   "author": "igarcia10",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf dist",
-    "build": "tsc -p .",
-    "start": "node dist/index.js",
-    "dev": "nodemon index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "devDependencies": {
     "nodemon": "^1.19.2"
