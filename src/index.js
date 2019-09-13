@@ -1,24 +1,23 @@
-const express = require('express');
-const http = require('http');
-const io = require('socket.io')(http);
+const io = require('socket.io')();
 
-const app = express();
+const PORT = process.env.PORT || 8080;
 
-io.sockets.on('connection', socket => {
-  socket.on('username', username => {
-    socket.username = username;
-    io.emit('is_online', '🔵 <i>' + socket.username + ' join the chat..</i>');
+io.on('connection', client => {
+  client.on('username', username => {
+    client.username = username;
+    io.emit('is_online', '🔵 <i>' + client.username + ' join the chat..</i>');
   });
 
-  socket.on('disconnect', username => {
-    socket.username = username;
-    io.emit('is_online', '🔴 <i>' + socket.username + ' left the chat..</i>');
+  client.on('disconnect', username => {
+    client.username = username;
+    io.emit('is_online', '🔴 <i>' + client.username + ' left the chat..</i>');
   })
 
-  socket.on('chat_message', message => {
-    io.emit('chat_message', '<strong>' + socket.username + '</strong>: ' + message);
+  client.on('chat_message', message => {
+    io.emit('chat_message', '<strong>' + client.username + '</strong>: ' + message);
   });
 
 });
 
-app.listen(process.env.PORT || 8080, () => console.log('Server running...'));
+io.listen(PORT);
+console.log(`Server listening on port ${PORT}...`);
